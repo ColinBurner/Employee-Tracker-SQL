@@ -1,9 +1,10 @@
 const inquirer = require('inquirer');
 const db = require('./db');
-require('dotenv').config();
+require('dotenv').config(); // load environment variables from .env for protecting user/password
 
 async function startApp() {
   while (true) {
+    // prompts the user for an action
     const { action } = await inquirer.prompt([
       {
         type: 'list',
@@ -29,6 +30,7 @@ async function startApp() {
       }
     ]);
 
+    // performs the action
     switch (action) {
       case 'View All Departments':
         await viewAllDepartments();
@@ -73,13 +75,14 @@ async function startApp() {
         await viewTotalBudgetByDepartment();
         break;
       case 'Exit':
-        db.end();
+        db.end(); //closes the db connection
         console.log('Goodbye!');
-        process.exit(0);
+        process.exit(0); // exits the app
     }
   }
 }
 
+// function to view all departments
 async function viewAllDepartments() {
   try {
     const res = await db.query('SELECT * FROM department');
@@ -89,6 +92,7 @@ async function viewAllDepartments() {
   }
 }
 
+// function to view all roles
 async function viewAllRoles() {
   try {
     const query = `
@@ -103,6 +107,7 @@ async function viewAllRoles() {
   }
 }
 
+// function to view all employees
 async function viewAllEmployees() {
   try {
     const query = `
@@ -120,6 +125,7 @@ async function viewAllEmployees() {
   }
 }
 
+// function to add department
 async function addDepartment() {
   try {
     const { name } = await inquirer.prompt([
@@ -137,6 +143,7 @@ async function addDepartment() {
   }
 }
 
+// function to add new role
 async function addRole() {
   try {
     const res = await db.query('SELECT * FROM department');
@@ -169,6 +176,7 @@ async function addRole() {
   }
 }
 
+// function to add new employee
 async function addEmployee() {
   try {
     const rolesRes = await db.query('SELECT * FROM role');
@@ -211,6 +219,7 @@ async function addEmployee() {
   }
 }
 
+// function to update employee role
 async function updateEmployeeRole() {
   try {
     const employeesRes = await db.query('SELECT * FROM employee');
@@ -242,6 +251,7 @@ async function updateEmployeeRole() {
   }
 }
 
+// function to update an employee's manager
 async function updateEmployeeManager() {
   try {
     const employeesRes = await db.query('SELECT * FROM employee');
@@ -274,6 +284,7 @@ async function updateEmployeeManager() {
   }
 }
 
+// function to view employees by their manager
 async function viewEmployeesByManager() {
   try {
     const managersRes = await db.query(`
@@ -306,6 +317,7 @@ async function viewEmployeesByManager() {
   }
 }
 
+// function to view employees by their department
 async function viewEmployeesByDepartment() {
   try {
     const departmentsRes = await db.query('SELECT * FROM department');
@@ -335,6 +347,7 @@ async function viewEmployeesByDepartment() {
   }
 }
 
+// function to delete a department
 async function deleteDepartment() {
   try {
     const departmentsRes = await db.query('SELECT * FROM department');
@@ -356,6 +369,7 @@ async function deleteDepartment() {
   }
 }
 
+// function to delete a role
 async function deleteRole() {
   try {
     const rolesRes = await db.query('SELECT * FROM role');
@@ -377,6 +391,7 @@ async function deleteRole() {
   }
 }
 
+// function to delete an employee (ex: if they were fired or quit)
 async function deleteEmployee() {
   try {
     const employeesRes = await db.query('SELECT * FROM employee');
@@ -398,6 +413,7 @@ async function deleteEmployee() {
   }
 }
 
+// function to view the total budget of a department
 async function viewTotalBudgetByDepartment() {
   try {
     const departmentsRes = await db.query('SELECT * FROM department');
@@ -427,4 +443,4 @@ async function viewTotalBudgetByDepartment() {
   }
 }
 
-startApp();
+startApp(); // starts the app
