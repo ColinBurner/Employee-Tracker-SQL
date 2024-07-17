@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a backend application that uses PostgreSQL to view and manage departments, roles and employees in a company utilizing a database. Using your terminal, with inquirer@8.2.4 pg and dotenv dependencies installed run node server.js. You will then be presented with a list of actions. When an action is chosen, the appropriate response is given from the application whether it's simply showing you the table of your choice, adding a department, role or employee or deleting a department, role or employee. Each time an action is chosen and something is input, the data is saved to the database. For example, if you added an employee, choose view all employees to verify that your new employee is now in the employees table with the data you entered.
+This is a backend application that uses PostgreSQL to view and manage departments, roles and employees in a company utilizing a database. Using your terminal, with inquirer@8.2.4 pg and dotenv dependencies installed run node server.js. (**NOTE** you will have to add your own user and password to the .env or just exclude them all together and not install dotenv and input your information into db.js) You will then be presented with a list of actions. When an action is chosen, the appropriate response is given from the application whether it's simply showing you the table of your choice, adding a department, role or employee or deleting a department, role or employee. Each time an action is chosen and something is input, the data is saved to the database. For example, if you added an employee, choose view all employees to verify that your new employee is now in the employees table with the data you entered.
 
 
 ## Table of Contents
