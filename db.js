@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // loads variables from .env for protecting user/password
 const { Client } = require('pg');
 
 const client = new Client({
@@ -9,7 +9,7 @@ const client = new Client({
     port: process.env.DB_PORT,
   });
 
-
+// connects to the db
   client.connect()
   .then(() => console.log('Connected to database'))
   .catch(err => console.error('Connection error', err.stack));
